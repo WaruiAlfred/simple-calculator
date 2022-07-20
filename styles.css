@@ -108,6 +108,64 @@ button:hover {
 }
 
 /* buttons__left */
+.buttons__left {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-areas:
+    "seven eight nine"
+    "four five six"
+    "one two three"
+    "percent zero period";
+}
+
+.zero {
+  grid-area: zero;
+}
+
+.one {
+  grid-area: one;
+}
+
+.two {
+  grid-area: two;
+}
+
+.three {
+  grid-area: three;
+}
+
+.four {
+  grid-area: four;
+}
+
+.five {
+  grid-area: five;
+}
+
+.six {
+  grid-area: six;
+}
+
+.seven {
+  grid-area: seven;
+}
+
+.eight {
+  grid-area: eight;
+}
+
+.nine {
+  grid-area: nine;
+}
+
+.percent {
+  grid-area: percent;
+}
+
+.period {
+  grid-area: period;
+}
 
 /* buttons__right */
 .equals {
