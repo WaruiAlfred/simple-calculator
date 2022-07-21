@@ -21,7 +21,8 @@ const addBtn = document.querySelector(".add");
 const equalsBtn = document.querySelector(".equals");
 
 ///// Global Variables
-let userInput;
+let userInput, operator, results;
+const operatorsSymbols = ["+", "-", "/", "*"];
 
 ///// Functions
 const add = function (num1, num2) {
@@ -55,11 +56,47 @@ const operate = function (operator, num1, num2) {
   }
 };
 
+const getAccurateUserInput = (userInput) => {
+  const stringPartToRemove = /undefined/;
+  if (stringPartToRemove.test(userInput)) {
+    return userInput.replace("undefined", "").trim();
+  } else {
+    return userInput;
+  }
+};
+
+const extractInputValues = (userInput) => {
+  const correctUserInput = getAccurateUserInput(userInput);
+  const separatedInputsArr = correctUserInput.split(/[+-/*]/);
+  return separatedInputsArr;
+};
+
+const performArithmeticOperation = (operator, values) => {
+  if (values.length < 2) return;
+  const operationOutput = operate(operator, +values[0], +values[1]);
+  // Check if output is a whole number or not
+  return operationOutput % 1 !== 0
+    ? operationOutput.toFixed(4)
+    : operationOutput;
+};
+
+const arithmeticOperationResults = (userInput, operator) => {
+  const values = extractInputValues(userInput);
+  return performArithmeticOperation(operator, values);
+};
+
 const populateDisplayCallback = function (e) {
   // Callback function that is called in number buttons event listeners to populate the display
-  userInput += e.target.value;
-  calcInput.value += e.target.value;
-  console.log(userInput);
+  const capturedValue = e.target.value;
+  userInput += capturedValue;
+  calcInput.value += capturedValue;
+
+  //check if an operator has been selected
+  if (operatorsSymbols.includes(capturedValue)) {
+    operator = capturedValue;
+  }
+
+  results = arithmeticOperationResults(userInput, operator);
 };
 
 ///// Event Listeners
@@ -80,3 +117,16 @@ addBtn.addEventListener("click", populateDisplayCallback);
 subtractBtn.addEventListener("click", populateDisplayCallback);
 multiplyBtn.addEventListener("click", populateDisplayCallback);
 divideBtn.addEventListener("click", populateDisplayCallback);
+
+equalsBtn.addEventListener("click", function () {
+  if (results) {
+    calcInput.value = results;
+  }
+});
+
+clearBtn.addEventListener("click", function () {
+  calcInput.value = "";
+  results = 0;
+  userInput = "";
+  operator = "";
+});
