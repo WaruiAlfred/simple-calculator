@@ -1,27 +1,18 @@
 ///// DOM Nodes
-const calcInput = document.querySelector(".calc-input");
+const calcInput1 = document.querySelector(".calc-input-1");
+const calcInput2 = document.querySelector(".calc-input-2");
 const clearBtn = document.querySelector(".clear");
-const divideBtn = document.querySelector(".divide");
-const multiplyBtn = document.querySelector(".multiply");
 const eraseBtn = document.querySelector(".erase");
-const zeroBtn = document.querySelector(".zero");
-const oneBtn = document.querySelector(".one");
-const twoBtn = document.querySelector(".two");
-const threeBtn = document.querySelector(".three");
-const fourBtn = document.querySelector(".four");
-const fiveBtn = document.querySelector(".five");
-const sixBtn = document.querySelector(".six");
-const sevenBtn = document.querySelector(".seven");
-const eightBtn = document.querySelector(".eight");
-const nineBtn = document.querySelector(".nine");
-const percentBtn = document.querySelector(".percent");
-const periodBtn = document.querySelector(".period");
-const subtractBtn = document.querySelector(".subtract");
-const addBtn = document.querySelector(".add");
 const equalsBtn = document.querySelector(".equals");
+const numberBtns = document.querySelectorAll("[data-number");
+const operandBtns = document.querySelectorAll("[data-operand");
 
 ///// Global Variables
-let userInput, operator, results;
+// let userInputs = [];
+let previousUserInput = "",
+  currentUserInput = "",
+  operator,
+  results;
 const operatorsSymbols = ["+", "-", "/", "*"];
 
 ///// Functions
@@ -52,10 +43,11 @@ const operate = function (operator, num1, num2) {
     case "/":
       return divide(num1, num2);
     default:
-      return "Something is missing:Either operator or one of the two required number inputs";
+      return;
   }
 };
 
+/*
 const getAccurateUserInput = (userInput) => {
   const stringPartToRemove = /undefined/;
   if (stringPartToRemove.test(userInput)) {
@@ -67,66 +59,145 @@ const getAccurateUserInput = (userInput) => {
 
 const extractInputValues = (userInput) => {
   const correctUserInput = getAccurateUserInput(userInput);
-  const separatedInputsArr = correctUserInput.split(/[+-/*]/);
+  const separatedInputsArr = correctUserInput.split(" ");
   return separatedInputsArr;
 };
 
 const performArithmeticOperation = (operator, values) => {
   if (values.length < 2) return;
   const operationOutput = operate(operator, +values[0], +values[1]);
+  console.log(operationOutput);
   // Check if output is a whole number or not
   return operationOutput % 1 !== 0
     ? operationOutput.toFixed(4)
     : operationOutput;
 };
 
-const arithmeticOperationResults = (userInput, operator) => {
-  const values = extractInputValues(userInput);
-  return performArithmeticOperation(operator, values);
+const arithmeticOperationResults = (userInputs, operator) => {
+  // const values = extractInputValues(userInput);
+  // console.log(values);
+  return performArithmeticOperation(operator, userInputs);
+};
+
+const getAndStoreUserInput = (userInput) => {
+  const valueObtained = getAccurateUserInput(userInput);
+  userInputs.push(valueObtained);
 };
 
 const populateDisplayCallback = function (e) {
   // Callback function that is called in number buttons event listeners to populate the display
   const capturedValue = e.target.value;
-  userInput += capturedValue;
-  calcInput.value += capturedValue;
 
-  //check if an operator has been selected
+  if (capturedValue === "." && userInput.includes(".")) return;
+
   if (operatorsSymbols.includes(capturedValue)) {
     operator = capturedValue;
+    getAndStoreUserInput(userInput);
+    userInput = "";
+  } else if (userInputs.length === 2) {
+    console.log(userInput);
+    getAndStoreUserInput(userInput);
+    results = arithmeticOperationResults(userInputs, operator);
+    calcInput1.value = results;
+    calcInput2.value = "";
+    console.log(results, userInputs);
+  } else {
+    userInput += capturedValue;
   }
 
-  results = arithmeticOperationResults(userInput, operator);
+  calcInput2.value += capturedValue;
+};
+*/
+
+const performArithmeticOperation = () => {
+  if (isNaN(+previousUserInput) || isNaN(+currentUserInput)) return; //check if values are numbers
+
+  const operationOutput = operate(
+    operator,
+    +previousUserInput,
+    +currentUserInput
+  );
+
+  // Check if output is a whole number or not
+  const finalResult =
+    operationOutput % 1 !== 0 ? operationOutput.toFixed(4) : operationOutput;
+
+  currentUserInput = finalResult;
+  operator = undefined;
+  previousUserInput = "";
+};
+
+function populateDisplay() {
+  calcInput2.value = currentUserInput;
+
+  if (operator != null) {
+    calcInput1.value = `${previousUserInput} ${operator}`;
+  } else {
+    calcInput1.value = "";
+  }
+}
+
+const clearDisplay = () => {
+  calcInput1.value = "";
+  calcInput2.value = "";
+  previousUserInput = "";
+  currentUserInput = "";
+  results = undefined;
+  operator = undefined;
+};
+
+const eraseCharacter = () => {
+  currentUserInput = currentUserInput.slice(0, -1);
+};
+
+const chooseNumber = (capturedValue) => {
+  if (capturedValue === "%") return;
+  if (capturedValue === "." && currentUserInput.includes(".")) return;
+  currentUserInput += capturedValue;
+};
+
+const chooseOperand = (capturedValue) => {
+  if (currentUserInput === "") return;
+
+  if (previousUserInput !== "") {
+    performArithmeticOperation();
+  }
+
+  operator = capturedValue;
+  previousUserInput = currentUserInput;
+  currentUserInput = "";
+};
+
+const numberBtnsListenerCallBack = (e) => {
+  chooseNumber(e.target.value);
+  populateDisplay();
+};
+
+const operandBtnsListenerCallBack = (e) => {
+  chooseOperand(e.target.value);
+  populateDisplay();
 };
 
 ///// Event Listeners
-// Values
-zeroBtn.addEventListener("click", populateDisplayCallback);
-oneBtn.addEventListener("click", populateDisplayCallback);
-twoBtn.addEventListener("click", populateDisplayCallback);
-threeBtn.addEventListener("click", populateDisplayCallback);
-fourBtn.addEventListener("click", populateDisplayCallback);
-fiveBtn.addEventListener("click", populateDisplayCallback);
-sixBtn.addEventListener("click", populateDisplayCallback);
-sevenBtn.addEventListener("click", populateDisplayCallback);
-eightBtn.addEventListener("click", populateDisplayCallback);
-nineBtn.addEventListener("click", populateDisplayCallback);
+numberBtns.forEach((button) =>
+  button.addEventListener("click", numberBtnsListenerCallBack)
+);
 
-// Operators
-addBtn.addEventListener("click", populateDisplayCallback);
-subtractBtn.addEventListener("click", populateDisplayCallback);
-multiplyBtn.addEventListener("click", populateDisplayCallback);
-divideBtn.addEventListener("click", populateDisplayCallback);
+operandBtns.forEach((button) =>
+  button.addEventListener("click", operandBtnsListenerCallBack)
+);
 
 equalsBtn.addEventListener("click", function () {
-  if (results) {
-    calcInput.value = results;
-  }
+  performArithmeticOperation();
+  populateDisplay();
 });
 
 clearBtn.addEventListener("click", function () {
-  calcInput.value = "";
-  results = 0;
-  userInput = "";
-  operator = "";
+  clearDisplay();
+  // populateDisplay();
+});
+
+eraseBtn.addEventListener("click", function () {
+  eraseCharacter();
+  populateDisplay();
 });

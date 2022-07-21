@@ -11,32 +11,33 @@
   <body>
     <main class="calculator">
       <section class="display">
-        <input type="text" class="calc-input" disabled />
+        <input type="text" class="calc-input-1" disabled />
+        <input type="text" class="calc-input-2" disabled />
       </section>
       <section class="buttons">
         <div class="buttons__top">
           <button class="clear">C</button>
-          <button class="divide" value="/">&divide;</button>
-          <button class="multiply" value="*">&times;</button>
+          <button data-operand class="divide" value="/">&divide;</button>
+          <button data-operand class="multiply" value="*">&times;</button>
           <button class="erase">&times;</button>
         </div>
         <div class="buttons__left">
-          <button class="zero" value="0">0</button>
-          <button class="one" value="1">1</button>
-          <button class="two" value="2">2</button>
-          <button class="three" value="3">3</button>
-          <button class="four" value="4">4</button>
-          <button class="five" value="5">5</button>
-          <button class="six" value="6">6</button>
-          <button class="seven" value="7">7</button>
-          <button class="eight" value="8">8</button>
-          <button class="nine" value="9">9</button>
-          <button class="percent">&percnt;</button>
-          <button class="period">&period;</button>
+          <button class="zero" data-number value="0">0</button>
+          <button class="one" data-number value="1">1</button>
+          <button class="two" data-number value="2">2</button>
+          <button class="three" data-number value="3">3</button>
+          <button class="four" data-number value="4">4</button>
+          <button class="five" data-number value="5">5</button>
+          <button class="six" data-number value="6">6</button>
+          <button class="seven" data-number value="7">7</button>
+          <button class="eight" data-number value="8">8</button>
+          <button class="nine" data-number value="9">9</button>
+          <button class="percent" data-number value="%">&percnt;</button>
+          <button class="period" data-number value=".">&period;</button>
         </div>
         <div class="button__right">
-          <button class="subtract" value="-">&minus;</button>
-          <button class="add" value="+">&plus;</button>
+          <button data-operand class="subtract" value="-">&minus;</button>
+          <button data-operand class="add" value="+">&plus;</button>
           <button class="equals">&equals;</button>
         </div>
       </section>
