@@ -214,10 +214,23 @@ equalsBtn.addEventListener("click", function () {
 
 clearBtn.addEventListener("click", function () {
   clearDisplay();
-  // populateDisplay();
 });
 
 eraseBtn.addEventListener("click", function () {
   eraseCharacter();
   populateDisplay();
 });
+
+// Keyboard Support
+document.onkeyup = (e) => {
+  if ((!isNaN(e.key) && +e.key > -1 && +e.key < 10) || e.key === ".") {
+    chooseNumber(e.key);
+    populateDisplay();
+  } else if (operatorsSymbols.includes(e.key)) {
+    chooseOperand(e.key);
+    populateDisplay();
+  } else if (e.key === "=") {
+    performArithmeticOperation();
+    populateDisplay();
+  }
+};
