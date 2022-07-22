@@ -109,6 +109,14 @@ const populateDisplayCallback = function (e) {
 };
 */
 
+const checkNumberDecimalPlaces = (number) => {
+  if (number.toString().split(".")[1].length > 4) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const performArithmeticOperation = () => {
   if (isNaN(+previousUserInput) || isNaN(+currentUserInput)) return; //check if values are numbers
 
@@ -130,7 +138,9 @@ const performArithmeticOperation = () => {
 
   // Check if output is a whole number or not
   const finalResult =
-    operationOutput % 1 !== 0 ? operationOutput.toFixed(4) : operationOutput;
+    operationOutput % 1 !== 0 && checkNumberDecimalPlaces(operationOutput)
+      ? operationOutput.toFixed(4)
+      : operationOutput;
 
   currentUserInput = finalResult;
   operator = undefined;
