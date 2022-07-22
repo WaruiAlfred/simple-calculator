@@ -8,7 +8,6 @@ const numberBtns = document.querySelectorAll("[data-number");
 const operandBtns = document.querySelectorAll("[data-operand");
 
 ///// Global Variables
-// let userInputs = [];
 let previousUserInput = "",
   currentUserInput = "",
   operator,
@@ -46,68 +45,6 @@ const operate = function (operator, num1, num2) {
       return;
   }
 };
-
-/*
-const getAccurateUserInput = (userInput) => {
-  const stringPartToRemove = /undefined/;
-  if (stringPartToRemove.test(userInput)) {
-    return userInput.replace("undefined", "").trim();
-  } else {
-    return userInput;
-  }
-};
-
-const extractInputValues = (userInput) => {
-  const correctUserInput = getAccurateUserInput(userInput);
-  const separatedInputsArr = correctUserInput.split(" ");
-  return separatedInputsArr;
-};
-
-const performArithmeticOperation = (operator, values) => {
-  if (values.length < 2) return;
-  const operationOutput = operate(operator, +values[0], +values[1]);
-  console.log(operationOutput);
-  // Check if output is a whole number or not
-  return operationOutput % 1 !== 0
-    ? operationOutput.toFixed(4)
-    : operationOutput;
-};
-
-const arithmeticOperationResults = (userInputs, operator) => {
-  // const values = extractInputValues(userInput);
-  // console.log(values);
-  return performArithmeticOperation(operator, userInputs);
-};
-
-const getAndStoreUserInput = (userInput) => {
-  const valueObtained = getAccurateUserInput(userInput);
-  userInputs.push(valueObtained);
-};
-
-const populateDisplayCallback = function (e) {
-  // Callback function that is called in number buttons event listeners to populate the display
-  const capturedValue = e.target.value;
-
-  if (capturedValue === "." && userInput.includes(".")) return;
-
-  if (operatorsSymbols.includes(capturedValue)) {
-    operator = capturedValue;
-    getAndStoreUserInput(userInput);
-    userInput = "";
-  } else if (userInputs.length === 2) {
-    console.log(userInput);
-    getAndStoreUserInput(userInput);
-    results = arithmeticOperationResults(userInputs, operator);
-    calcInput1.value = results;
-    calcInput2.value = "";
-    console.log(results, userInputs);
-  } else {
-    userInput += capturedValue;
-  }
-
-  calcInput2.value += capturedValue;
-};
-*/
 
 const checkNumberDecimalPlaces = (number) => {
   if (number.toString().split(".")[1].length > 4) {
