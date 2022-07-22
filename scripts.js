@@ -232,5 +232,10 @@ document.onkeyup = (e) => {
   } else if (e.key === "=") {
     performArithmeticOperation();
     populateDisplay();
+  } else if (e.key === "Backspace") {
+    eraseCharacter();
+    populateDisplay();
+  } else if (e.key === "Delete") {
+    clearDisplay();
   }
 };
