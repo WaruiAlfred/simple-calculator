@@ -1,7 +1,5 @@
 # CALCULATOR
 
-![GitHub top language](https://img.shields.io/github/languages/top/WaruiAlfred/simple-calculator?color=orange&label=HTML5&logo=HTML5&logoColor=orange&style=flat) ![GitHub top language](https://img.shields.io/github/languages/top/WaruiAlfred/simple-calculator?color=yellow&label=JAVASCRIPT&logo=JAVASCRIPT&logoColor=yellow&style=flat) ![GitHub top language](https://img.shields.io/github/languages/top/WaruiAlfred/simple-calculator?color=blue&label=CSS3&logo=CSS3&logoColor=blue&style=flat) ![GitHub top language](https://img.shields.io/github/languages/top/WaruiAlfred/simple-calculator?color=white&label=MarkDown&logo=MarkDown&logoColor=white&style=flat)
-
 #### Created By: **Alfred Warui**
 
 ## Description
@@ -16,6 +14,15 @@ This calculator application works like a normal calculator except that it is not
 ## Known Bugs
 
 There are no known bugs.
+
+## Technologies Used
+
+![GitHub language count](https://img.shields.io/github/languages/count/WaruiAlfred/simple-calculator?style=for-the-badge)
+
+- HTML5
+- CSS3
+- JAVASCRIPT
+- MarkDown for the _README file_
 
 ## Site
 
