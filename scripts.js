@@ -112,6 +112,16 @@ const populateDisplayCallback = function (e) {
 const performArithmeticOperation = () => {
   if (isNaN(+previousUserInput) || isNaN(+currentUserInput)) return; //check if values are numbers
 
+  if (operator === "/" && currentUserInput == 0) {
+    currentUserInput = "Not possible";
+
+    setTimeout(() => {
+      clearDisplay();
+    }, 400);
+
+    return;
+  }
+
   const operationOutput = operate(
     operator,
     +previousUserInput,
@@ -137,7 +147,7 @@ function populateDisplay() {
   }
 }
 
-const clearDisplay = () => {
+const clearDisplay = function () {
   calcInput1.value = "";
   calcInput2.value = "";
   previousUserInput = "";
