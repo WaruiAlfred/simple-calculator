@@ -23,6 +23,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: linear-gradient(to right, #eeeea2, #9c9898, #e73de7);
 }
 
 .calculator {
@@ -69,7 +70,7 @@ button:hover {
 
   display: grid;
   grid-template-rows: 5rem 1fr;
-  grid-template-columns: 1fr 11rem;
+  grid-template-columns: 1fr minmax(3rem, 11rem);
   grid-column-gap: 2rem;
 }
 
@@ -93,7 +94,7 @@ button:hover {
   font-size: 3rem;
 }
 
-.button__right {
+.buttons__right {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
 
@@ -104,7 +105,7 @@ button:hover {
 }
 
 .buttons__top button,
-.button__right button {
+.buttons__right button {
   color: var(--primary-blue);
   font-size: 4rem;
 }
