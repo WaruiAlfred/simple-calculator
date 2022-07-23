@@ -23,7 +23,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(to right, #eeeea2, #9c9898, #e73de7);
 }
 
 .calculator {
