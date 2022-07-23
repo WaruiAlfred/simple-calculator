@@ -58,13 +58,7 @@ const performArithmeticOperation = () => {
   if (isNaN(+previousUserInput) || isNaN(+currentUserInput)) return; //check if values are numbers
 
   if (operator === "/" && currentUserInput == 0) {
-    currentUserInput = "Not possible";
-
-    setTimeout(() => {
-      clearDisplay();
-    }, 400);
-
-    return;
+    currentUserInput = "Can't divide by zero";
   }
 
   const operationOutput = operate(
