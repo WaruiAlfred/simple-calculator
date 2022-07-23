@@ -59,6 +59,7 @@ const performArithmeticOperation = () => {
 
   if (operator === "/" && currentUserInput == 0) {
     currentUserInput = "Can't divide by zero";
+    return;
   }
 
   const operationOutput = operate(
